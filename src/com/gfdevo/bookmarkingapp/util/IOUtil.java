@@ -1,4 +1,4 @@
-package com.semanticsquare.thrillio.util;
+package com.gfdevo.bookmarkingapp.util;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
