@@ -1,9 +1,11 @@
 package com.gfdevo.bookmarkingapp.managers;
 
+import com.gfdevo.bookmarkingapp.dao.UserDao;
 import com.gfdevo.bookmarkingapp.entities.User;
 
 public class UserManager {
     private static UserManager instance = new UserManager();
+    private static UserDao dao = new UserDao();
 
     private UserManager() {
     }
@@ -23,5 +25,9 @@ public class UserManager {
         user.setGender(gender);
         user.setUserType(userType);
         return user;
+    }
+
+    public User[] getUsers() {
+        return dao.getUsers();
     }
 }
