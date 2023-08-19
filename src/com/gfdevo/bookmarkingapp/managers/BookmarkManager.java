@@ -2,6 +2,11 @@ package com.gfdevo.bookmarkingapp.managers;
 
 import com.gfdevo.bookmarkingapp.dao.BookmarkDao;
 import com.gfdevo.bookmarkingapp.entities.*;
+import com.gfdevo.bookmarkingapp.util.HttpConnect;
+import com.gfdevo.bookmarkingapp.util.IOUtil;
+
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 
 public class BookmarkManager {
     private static BookmarkManager instance = new BookmarkManager();
@@ -57,6 +62,24 @@ public class BookmarkManager {
         UserBookmark userBookmark = new UserBookmark();
         userBookmark.setUser(user);
         userBookmark.setBookmark(bookmark);
+
+
+        if (bookmark instanceof WebLink) {
+            try {
+                String url = ((WebLink)bookmark).getUrl();
+                if (!url.endsWith(".pdf")) {
+                    String webpage = HttpConnect.download(((WebLink)bookmark).getUrl());
+                    if (webpage != null) {
+                        IOUtil.write(webpage, bookmark.getId());
+                    }
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+
         dao.saveUserBookmark(userBookmark);
     }
 
