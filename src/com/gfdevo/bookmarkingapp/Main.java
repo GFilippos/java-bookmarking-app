@@ -5,9 +5,11 @@ import com.gfdevo.bookmarkingapp.entities.User;
 import com.gfdevo.bookmarkingapp.managers.BookmarkManager;
 import com.gfdevo.bookmarkingapp.managers.UserManager;
 
+import java.util.List;
+
 public class Main {
-    private static User[] users;
-    private static Bookmark[][] bookmarks;
+    private static List<User> users;
+    private static List<List<Bookmark>> bookmarks;
     private static void loadData() {
         System.out.println("1. Loading data ...");
         DataStore.loadData();
@@ -25,7 +27,7 @@ public class Main {
     }
 
     private static void printBookmarkData() {
-        for (Bookmark[] bookmarkList : bookmarks) {
+        for (List<Bookmark> bookmarkList : bookmarks) {
             for (Bookmark bookmark: bookmarkList) {
                 System.out.println(bookmark);
             }

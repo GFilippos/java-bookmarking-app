@@ -8,6 +8,7 @@ import com.gfdevo.bookmarkingapp.entities.User;
 import com.gfdevo.bookmarkingapp.partner.Shareable;
 
 import javax.xml.crypto.Data;
+import java.util.List;
 
 public class View {
 //    public static void bookmark(User user, Bookmark[][] bookmarks) {
@@ -21,19 +22,19 @@ public class View {
 //        }
 //    }
 
-    public static void browse(User user, Bookmark[][] bookmarks) {
+    public static void browse(User user, List<List<Bookmark>> bookmarks) {
         System.out.println("\n" + user.getEmail() + " is browsing items ...");
         int bookmarkCount = 0;
-        for (Bookmark [] bookmarksList : bookmarks) {
-            for (Bookmark bookmark : bookmarksList) {
-                if(bookmarkCount < DataStore.USER_BOOKMARK_LIMIT) {
+        for (List<Bookmark> bookmarkList : bookmarks) {
+            for (Bookmark bookmark : bookmarkList) {
+//                if(bookmarkCount < DataStore.USER_BOOKMARK_LIMIT) {
                     boolean isBookmarked = getBookmarkDecision(bookmark);
                     if (isBookmarked) {
                         BookmarkController.getInstance().saveUserBookmark(user, bookmark);
                         System.out.println("New Item Bookmarked --" + bookmark);
                         bookmarkCount++;
                     }
-                }
+//                }
 
                 // Mark as kid friendly
                 if (user.getUserType().equals(UserType.EDITOR) || user.getUserType().equals(UserType.CHIEF_EDITOR)) {

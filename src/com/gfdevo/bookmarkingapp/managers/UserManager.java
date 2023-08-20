@@ -3,6 +3,8 @@ package com.gfdevo.bookmarkingapp.managers;
 import com.gfdevo.bookmarkingapp.dao.UserDao;
 import com.gfdevo.bookmarkingapp.entities.User;
 
+import java.util.List;
+
 public class UserManager {
     private static UserManager instance = new UserManager();
     private static UserDao dao = new UserDao();
@@ -27,7 +29,7 @@ public class UserManager {
         return user;
     }
 
-    public User[] getUsers() {
+    public List<User> getUsers() {
         return dao.getUsers();
     }
 }
